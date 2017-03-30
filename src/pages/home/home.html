@@ -1,0 +1,138 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>My Recipe</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <h1>Recipe List</h1>
+  <ion-label>{{count}}</ion-label>
+  <button ion-button (click)="addRecipe()">
+    <ion-icon name="add" ></ion-icon>
+  </button>
+
+
+  <ion-list inset >
+
+
+      <ion-item *ngFor="let recipe of recipes | async" >
+
+
+        <ion-thumbnail item-left>
+              <img src="img/thumbnail-totoro.png">
+            </ion-thumbnail>
+
+    <!-- <ion-label >{{recipe.name}}</ion-label> -->
+    <h2>{{recipe.name}}</h2>
+    <p>descriptions:hard code </p>
+    <button ion-button color="primary"  item-right>
+    <ion-icon name="star" ></ion-icon></button>
+
+      <button ion-button color="primary" (click)="editRecipe(recipe)" item-right>
+      <ion-icon name="build" ></ion-icon></button>
+
+        <button ion-button color="danger" (click)="deleteRecipe(recipe)" item-right>
+        <ion-icon name="trash" ></ion-icon></button>
+
+
+
+
+
+
+
+</ion-item>
+
+  </ion-list>
+
+
+
+
+
+  <ion-list>
+
+    <!-- List header with buttons on each side -->
+    <ion-list-header>
+      <button ion-button item-left (click)="buttonClick()">Button</button>
+      List Header
+      <button ion-button outline item-right (click)="buttonClick()">Outline</button>
+    </ion-list-header>
+
+    <!-- Loops through and creates multiple items -->
+    <ion-item *ngFor="let item of items">
+      Item {{item}}
+    </ion-item>
+
+    <!-- Button item with an icon on the left -->
+    <button ion-item>
+      <ion-icon name="star" item-left></ion-icon>
+      Button Item
+    </button>
+
+    <!-- Item with a label and content -->
+    <ion-item>
+      <ion-label>
+        Item Label
+      </ion-label>
+      <div item-content>
+        Item Content next to the label
+      </div>
+    </ion-item>
+
+    <!-- Item with left and right buttons -->
+    <ion-item>
+      <button ion-button item-left (click)="buttonClick()">Button</button>
+      Item
+      <button ion-button outline item-right (click)="buttonClick()">Outline</button>
+    </ion-item>
+
+    <!-- Item divider with a right button -->
+    <ion-item-divider>
+      Item Divider
+      <button ion-button item-right>Button</button>
+    </ion-item-divider>
+
+    <!-- Disabled button item with left and right buttons -->
+    <button ion-item disabled>
+      <button ion-button item-left (click)="buttonClick()">
+        <ion-icon name="home"></ion-icon>
+        Left Icon
+      </button>
+      Disabled Button Item
+      <button ion-button outline item-right (click)="buttonClick()">
+        <ion-icon name="star"></ion-icon>
+        Left Icon
+      </button>
+    </button>
+
+    <!-- Item with an avatar on the left and button on the right -->
+    <ion-item>
+      <ion-avatar item-left>
+        <img src="img/my-avatar.png">
+      </ion-avatar>
+      Avatar Item
+      <button ion-button outline item-right>View</button>
+    </ion-item>
+
+    <!-- Item with a thumbnail on the right -->
+    <ion-item>
+      <h2>Item</h2>
+      <p>Item Paragraph</p>
+      <ion-thumbnail item-right>
+        <img src="img/my-thumbnail.png">
+      </ion-thumbnail>
+    </ion-item>
+
+    <!-- Sliding item -->
+    <ion-item-sliding>
+      <ion-item>
+        Item
+      </ion-item>
+      <ion-item-options>
+        <button ion-button color="primary" (click)="archive()">Archive</button>
+      </ion-item-options>
+    </ion-item-sliding>
+
+  </ion-list>
+
+
+</ion-content>
