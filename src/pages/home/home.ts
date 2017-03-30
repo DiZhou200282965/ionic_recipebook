@@ -34,7 +34,7 @@ public  myDate :any = new Date();
     this.navCtrl.push(DetailsPage,{recipe:recipe}); // redirect to detail page with prameter
   }
   // function delete recipe
-  deleterRcipe(recipe){
+  deleteRecipe(recipe){
     this.recipes.remove(recipe); // delete selected recipe from db
   }
 

@@ -16,18 +16,17 @@
 <ion-content padding>
   <ion-list>
     <ion-item>
-    <ion-label>Time</ion-label>
-    <ion-datetime displayFormat="HH:mm" [(ngModel)]="recipe.time"></ion-datetime>
-  </ion-item>
-    <ion-item>
-      <ion-label fixed>Title</ion-label>
+      <ion-label fixed>Recipe Name</ion-label>
       <ion-input [(ngModel)]="recipe.name"  type="text" value=""></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label fixed>Note</ion-label>
-      <ion-input type="text" [(ngModel)]="recipe.note"></ion-input>
+      <ion-label fixed>Description</ion-label>
+      <ion-input type="text" [(ngModel)]="recipe.description"></ion-input>
     </ion-item>
-
+    <ion-item>
+      <ion-label fixed>Total Time</ion-label>
+      <ion-input type="text" [(ngModel)]="recipe.time"></ion-input>
+    </ion-item>
 
   </ion-list>
   <button ion-button (click)="saveRecipe()" >
