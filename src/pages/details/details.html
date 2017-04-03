@@ -12,24 +12,82 @@
 
 </ion-header>
 
-
 <ion-content padding>
   <ion-list>
+ <!-- #################  part1  ############# -->
     <ion-item>
-      <ion-label fixed>Recipe Name</ion-label>
+      <ion-label >Recipe Name</ion-label>
       <ion-input [(ngModel)]="recipe.name"  type="text" value=""></ion-input>
     </ion-item>
+  <ion-item>
+    <ion-label >Category</ion-label>
+    <ion-select [(ngModel)]="recipe.category">
+<ion-option value="Appetizer">Appetizer</ion-option>
+   <ion-option value="Main">Main</ion-option>
+   <ion-option value="Dessert">Dessert</ion-option>
+   <ion-option value="other">other</ion-option>
+ </ion-select>
+      </ion-item>
     <ion-item>
-      <ion-label fixed>Description</ion-label>
-      <ion-input type="text" [(ngModel)]="recipe.description"></ion-input>
+    <ion-label >Total Time</ion-label>
+      <ion-input type="number" [(ngModel)]="recipe.time" placeholder="roughly minutes"></ion-input>
     </ion-item>
+  </ion-list>
+
+
+
+<!-- ############### part2 ################  -->
+  <ion-item >
+      <ion-label stack>Ingredient</ion-label>
+       <ion-input [(ngModel)]="ingredient.name"  type="text" value=""></ion-input>
+  </ion-item>
+
     <ion-item>
-      <ion-label fixed>Total Time</ion-label>
-      <ion-input type="text" [(ngModel)]="recipe.time"></ion-input>
+      <ion-label stack>Measure</ion-label>
+       <ion-input [(ngModel)]="ingredient.measure"  type="text" value=""></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stack>Unit</ion-label>
+      <ion-input [(ngModel)]="ingredient.unit"  type="text" value=""></ion-input>
+    </ion-item>
+  <button ion-button ><ion-icon name="add" ></ion-icon></button>
+
+
+
+<ion-grid>
+  <ion-row>
+    <ion-col col-8>
+      <!-- Ingredients -->
+    </ion-col>
+
+    <ion-col col-2>
+      <!-- Measure -->
+    </ion-col>
+
+    <ion-col col-2>
+      <!-- Unit -->
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
+
+
+
+    <!-- ############ part3 ###########   -->
+    <ion-list>
+    <ion-item>
+      <ion-label >Description</ion-label>
+      <ion-textarea [(ngModel)]="recipe.description"  placeholder="your description"></ion-textarea>
+      <!-- <ion-input type="text" [(ngModel)]="recipe.description" placeholder="your description"></ion-input> -->
     </ion-item>
 
   </ion-list>
+
+
+
   <button ion-button (click)="saveRecipe()" >
     Save
   </button>
+
 </ion-content>

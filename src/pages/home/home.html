@@ -12,7 +12,7 @@
   <ion-list inset >
     <!-- Sliding item -->
     <ion-item-sliding *ngFor="let recipe of recipes | async">
-      <ion-item  >
+      <ion-item (click)="detailRecipe(recipe)">
         <ion-thumbnail item-left>
               <img src="img/thumbnail-totoro.png">
             </ion-thumbnail>
@@ -22,10 +22,10 @@
 </ion-item>
       <ion-item-options>
         <!-- button list -->
-        <button ion-button color="primary"  item-right>
+        <button ion-button color="primary" (click)="addToFavorite(recipe)" item-right>
         <ion-icon name="star" ></ion-icon></button>
-          <button ion-button color="primary" (click)="editRecipe(recipe)" item-right>
-          <ion-icon name="build" ></ion-icon></button>
+          <!-- <button ion-button color="primary" (click)="editRecipe(recipe)" item-right>
+          <ion-icon name="build" ></ion-icon></button> -->
             <button ion-button color="danger" (click)="deleteRecipe(recipe)" item-right>
             <ion-icon name="trash" ></ion-icon></button>
       </ion-item-options>
@@ -38,7 +38,7 @@
 
 
   <ion-fab right bottom>
-      <button ion-fab  (click)="addRecipe()"><ion-icon name="add" ></ion-icon></button>
+      <button ion-fab  (click)="addRecipe()" ><ion-icon name="add" ></ion-icon></button>
       <!-- <ion-fab-list side="left">
         <button ion-fab><ion-icon name="logo-facebook"></ion-icon></button>
       </ion-fab-list> -->

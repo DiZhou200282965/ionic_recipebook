@@ -19,7 +19,7 @@ import { NavController, AlertController } from 'ionic-angular';
 export class HomePage {
 // variables declarations
 public  recipes:FirebaseListObservable<any>
-public  myDate :any = new Date();
+
 
 // constructor
   constructor(public navCtrl: NavController,public alertCtrl: AlertController,  af: AngularFire) {
@@ -29,15 +29,21 @@ public  myDate :any = new Date();
   addRecipe(){
     this.navCtrl.push(DetailsPage); // redirect to detail page
   }
-  // function edit recipes
-  editRecipe(recipe){
-    this.navCtrl.push(DetailsPage,{recipe:recipe}); // redirect to detail page with prameter
-  }
+  // // function edit recipes
+  // editRecipe(recipe){
+  //   this.navCtrl.push(DetailsPage,{recipe:recipe}); // redirect to detail page with prameter
+  // }
   // function delete recipe
   deleteRecipe(recipe){
     this.recipes.remove(recipe); // delete selected recipe from db
   }
-
+  detailRecipe(recipe){
+      this.navCtrl.push(DetailsPage,{recipe:recipe});
+  }
+addToFavorite(recipe){
+  recipe.favorite = true;
+  this.recipes.update(recipe.$key,recipe);
+}
 
 
 }

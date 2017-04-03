@@ -14,6 +14,7 @@ export class DetailsPage {
 // variables declarations
 
 public recipe:any; //recipe binded recipes
+public ingredient:any;
 editBol:boolean=false; // boolean to decide if its Edit or Add
 recipes:FirebaseListObservable<any>; // recipes that get from db
 
@@ -23,11 +24,13 @@ recipes:FirebaseListObservable<any>; // recipes that get from db
     // if there is pram passing, get recipe object
     if (navParams.get("recipe")==undefined) {
         this.recipe = {};
+        this.ingredient={};
     }
     else
     {
       this.editBol=true;
         this.recipe=navParams.get("recipe");
+        this.ingredient = {};
     }
   // get recipes from firebase
     this.recipes = af.database.list('/recipes');
