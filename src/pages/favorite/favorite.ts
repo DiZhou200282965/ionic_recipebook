@@ -18,10 +18,14 @@ public  recipes:FirebaseListObservable<any>
       this.recipes = af.database.list('/recipes'); // get recipes list from db
   }
   detailRecipe(recipe){
-      this.navCtrl.push(DetailsPage,{recipe:recipe});
+      this.navCtrl.push(DetailsPage,{recipe:recipe,method:"view"});
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad FavoritePage');
+  }
+  removeFav(recipe){
+  recipe.favorite = false;
+    this.recipes.update(recipe.$key,recipe);
   }
 
 }

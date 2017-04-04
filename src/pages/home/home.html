@@ -16,16 +16,19 @@
         <ion-thumbnail item-left>
               <img src="img/thumbnail-totoro.png">
             </ion-thumbnail>
-    <!-- <ion-label >{{recipe.name}}</ion-label> -->
-    <h2>{{recipe.name}}</h2>
-    <p>descriptions:{{recipe.description}} </p>
+    <h2 >{{recipe.name}}</h2>
+      <ion-icon *ngIf="recipe.favorite" name="star" ></ion-icon>
+    <h3 >{{recipe.category}}</h3>
+    <p >descriptions:{{recipe.description}} </p>
 </ion-item>
       <ion-item-options>
         <!-- button list -->
-        <button ion-button color="primary" (click)="addToFavorite(recipe)" item-right>
+        <button *ngIf="!recipe.favorite" ion-button color="secondary" (click)="addToFavorite(recipe)" item-right>
         <ion-icon name="star" ></ion-icon></button>
-          <!-- <button ion-button color="primary" (click)="editRecipe(recipe)" item-right>
-          <ion-icon name="build" ></ion-icon></button> -->
+        <button *ngIf="recipe.favorite" ion-button color="secondary" (click)="removeFav(recipe)" item-right>
+        <ion-icon name="md-remove-circle" ></ion-icon></button>
+          <button ion-button color="primary" (click)="editRecipe(recipe)" item-right>
+          <ion-icon name="build" ></ion-icon></button>
             <button ion-button color="danger" (click)="deleteRecipe(recipe)" item-right>
             <ion-icon name="trash" ></ion-icon></button>
       </ion-item-options>

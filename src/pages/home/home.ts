@@ -27,21 +27,25 @@ public  recipes:FirebaseListObservable<any>
   }
   // function add recipe
   addRecipe(){
-    this.navCtrl.push(DetailsPage); // redirect to detail page
+    this.navCtrl.push(DetailsPage,{method:"add"}); // redirect to detail page
   }
-  // // function edit recipes
-  // editRecipe(recipe){
-  //   this.navCtrl.push(DetailsPage,{recipe:recipe}); // redirect to detail page with prameter
-  // }
+  // function edit recipes
+  editRecipe(recipe){
+    this.navCtrl.push(DetailsPage,{recipe:recipe,method:"edit"}); // redirect to detail page with prameter
+  }
   // function delete recipe
   deleteRecipe(recipe){
     this.recipes.remove(recipe); // delete selected recipe from db
   }
   detailRecipe(recipe){
-      this.navCtrl.push(DetailsPage,{recipe:recipe});
+      this.navCtrl.push(DetailsPage,{recipe:recipe,method:"view"});
   }
 addToFavorite(recipe){
   recipe.favorite = true;
+  this.recipes.update(recipe.$key,recipe);
+}
+removeFav(recipe){
+recipe.favorite = false;
   this.recipes.update(recipe.$key,recipe);
 }
 
