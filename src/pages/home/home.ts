@@ -49,5 +49,4 @@ recipe.favorite = false;
   this.recipes.update(recipe.$key,recipe);
 }
 
-
 }
