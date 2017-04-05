@@ -8,7 +8,6 @@ import { MyApp } from './app.component';
 import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
-import { TabsPage } from '../pages/tabs/tabs';
 import { DetailsPage } from '../pages/details/details';
 import { FavoritePage } from '../pages/favorite/favorite';
 // Import the AF2 Module
@@ -28,7 +27,6 @@ export const firebaseConfig = {
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage,
     DetailsPage,
     FavoritePage
   ],
@@ -42,7 +40,6 @@ export const firebaseConfig = {
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage,
     DetailsPage,
     FavoritePage
   ],

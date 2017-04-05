@@ -37,24 +37,15 @@
 
 
 <!-- ############### part2 ################  -->
-<ion-list *ngIf="!disableEdit">
-  <ion-item >
-      <ion-label stack>Ingredient</ion-label>
-       <ion-input  [(ngModel)]="ingredient.name"  type="text" value=""></ion-input>
-  </ion-item>
 
-    <ion-item>
-      <ion-label stack>Measure</ion-label>
-       <ion-input  [(ngModel)]="ingredient.measure"  type="text" value=""></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label stack>Unit</ion-label>
-      <ion-input [(ngModel)]="ingredient.unit"  type="text" value=""></ion-input>
-    </ion-item>
-  <button ion-button (click)="addIngredient(ingredient,recipe)"><ion-icon name="add" ></ion-icon></button>
-</ion-list>
-
+  <ion-row  >
+      <ion-col col-11>
+        <h2>Ingredients</h2>
+        </ion-col>
+        <ion-col col-1>
+        <button ion-button (click)="addIngredient(ingredient,recipe)"><ion-icon name="add" ></ion-icon></button>
+      </ion-col>
+    </ion-row>
 
 <ion-grid>
   <ion-row  >
@@ -72,6 +63,23 @@
     <!-- Unit -->
     Unit
   </ion-col>
+</ion-row>
+<ion-row *ngIf="!disableEdit">
+  <ion-col col-8>
+  <ion-item >
+       <ion-input  [(ngModel)]="ingredient.name"  type="text" value="" placeholder="name"></ion-input>
+  </ion-item>
+  </ion-col>
+    <ion-col col-2>
+    <ion-item>
+       <ion-input  [(ngModel)]="ingredient.measure"  type="text" value="" placeholder="Measure"></ion-input>
+    </ion-item>
+  </ion-col>
+    <ion-col col-2>
+    <ion-item>
+      <ion-input [(ngModel)]="ingredient.unit"  type="text" value=""placeholder="Unit"></ion-input>
+    </ion-item>
+      </ion-col>
 </ion-row>
     <ion-row *ngFor="let i  of recipe.ingredient" >
     <ion-col col-8>

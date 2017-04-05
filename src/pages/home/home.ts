@@ -25,6 +25,7 @@ public  recipes:FirebaseListObservable<any>
   constructor(public navCtrl: NavController,public alertCtrl: AlertController,  af: AngularFire) {
     this.recipes = af.database.list('/recipes'); // get recipes list from db
   }
+
   // function add recipe
   addRecipe(){
     this.navCtrl.push(DetailsPage,{method:"add"}); // redirect to detail page
