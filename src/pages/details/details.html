@@ -57,22 +57,40 @@
 
 
 <ion-grid>
-  <ion-row *ngFor="let ingredient of recipe.ingredient ">
+  <ion-row  >
+  <ion-col col-8>
+    <!-- Ingredients -->
+  Name
+  </ion-col>
+
+  <ion-col col-2>
+    <!-- Measure -->
+  Measure
+  </ion-col>
+
+  <ion-col col-2>
+    <!-- Unit -->
+    Unit
+  </ion-col>
+</ion-row>
+    <ion-row *ngFor="let i  of recipe.ingredient" >
     <ion-col col-8>
       <!-- Ingredients -->
-      {{ingredient.name}}
+      {{ i.name }}
     </ion-col>
 
     <ion-col col-2>
       <!-- Measure -->
-      {{ingredient.measure}}
+      {{i.measure}}
     </ion-col>
 
     <ion-col col-2>
       <!-- Unit -->
-      {{ingredient.unit}}
+      {{i.unit}}
     </ion-col>
+
   </ion-row>
+
 </ion-grid>
 
 

@@ -54,13 +54,16 @@ addIngredient(ingredient,recipe){
   if (ingredient.measure==undefined||ingredient.unit==undefined||ingredient.name==undefined) {
     this.showAlert();
   }
-  // else{
-  //   if (recipe.ingredient==undefined) {
-  //       recipe.ingredient=[];
-  //   }
-  //   recipe.ingredient.push(ingredient);
-  //   this.recipes.update(recipe.$key,recipe);
-  // }
+  else{
+
+    if (recipe.ingredient==undefined) {
+        recipe.ingredient=[];
+    }
+      console.log(ingredient)
+    recipe.ingredient.push(ingredient);
+      console.log(recipe)
+    this.recipes.update(recipe.$key,recipe);
+  }
 }
 
 showAlert() {
