@@ -6,21 +6,22 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>Add a New recipe</ion-title>
+  <ion-navbar color="dark">
+    <ion-title color="light">Recipe</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 <ion-content padding>
-  <ion-list>
+ 
+    <ion-grid>
  <!-- #################  part1  ############# -->
     <ion-item>
-      <ion-label >Recipe Name</ion-label>
+      <ion-label color="dark">Recipe Name</ion-label>
       <ion-input [disabled]="disableEdit" [(ngModel)]="recipe.name"  type="text" value=""></ion-input>
     </ion-item>
   <ion-item>
-    <ion-label >Category</ion-label>
+    <ion-label color="dark">Category</ion-label>
     <ion-select [disabled]="disableEdit"  [(ngModel)]="recipe.category">
 <ion-option value="Appetizer">Appetizer</ion-option>
    <ion-option value="Main">Main</ion-option>
@@ -29,10 +30,11 @@
  </ion-select>
       </ion-item>
     <ion-item>
-    <ion-label >Total Time</ion-label>
+    <ion-label color="dark" >Total Time</ion-label>
       <ion-input [disabled]="disableEdit" type="number" [(ngModel)]="recipe.time" placeholder="roughly minutes"></ion-input>
     </ion-item>
-  </ion-list>
+    </ion-grid>
+
 
 
 
@@ -43,7 +45,7 @@
         <h2>Ingredients</h2>
         </ion-col>
         <ion-col col-1>
-        <button ion-button (click)="addIngredient(ingredient,recipe)"><ion-icon name="add" ></ion-icon></button>
+        <button color="danger" ion-button (click)="addIngredient(ingredient,recipe)"><ion-icon name="add" ></ion-icon></button>
       </ion-col>
     </ion-row>
     <ion-row *ngIf="!disableEdit">
@@ -103,14 +105,16 @@
 
 
     <!-- ############ part3 ###########   -->
+    <ion-grid>
     <ion-list>
     <ion-item>
-      <ion-label >Description</ion-label>
-      <ion-textarea [disabled]="disableEdit" [(ngModel)]="recipe.description"  placeholder="your description"></ion-textarea>
+      <ion-label color="dark">Description</ion-label>
+      <ion-textarea color="dark" [disabled]="disableEdit" [(ngModel)]="recipe.description"  placeholder="your description"></ion-textarea>
       <!-- <ion-input type="text" [(ngModel)]="recipe.description" placeholder="your description"></ion-input> -->
     </ion-item>
 
   </ion-list>
+    </ion-grid>
 
 
 

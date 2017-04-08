@@ -3,7 +3,7 @@
 
 <ion-header>
 
-  <ion-navbar color="danger">
+  <ion-navbar color="dark">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
@@ -13,7 +13,8 @@
 
 
 
-<ion-content padding>
+<ion-content>
+
   <!--<ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
 <ion-list>
   <ion-item *ngFor="let item of items">
@@ -22,23 +23,24 @@
 </ion-list>
   <ion-label>{{count}}</ion-label>-->
 
-
+<ion-grid>
   <ion-list inset >
     <!-- Sliding item -->
+
     <ion-item-sliding *ngFor="let recipe of recipes | async">
       <ion-item (click)="detailRecipe(recipe)">
         <ion-thumbnail item-left>
               <img src="img/thumbnail-totoro.png">
             </ion-thumbnail>
     <h2 >{{recipe.name}}</h2>
-      <ion-icon *ngIf="recipe.favorite" name="star" ></ion-icon>
+      <ion-icon *ngIf="recipe.favorite" name="heart" color="custom" ></ion-icon>
     <h3 >{{recipe.category}}</h3>
-    <p >descriptions:{{recipe.description}} </p>
+    <p >{{recipe.description}} </p>
 </ion-item>
       <ion-item-options>
         <!-- button list -->
         <button *ngIf="!recipe.favorite" ion-button color="secondary" (click)="addToFavorite(recipe)" item-right>
-        <ion-icon name="star" ></ion-icon></button>
+        <ion-icon name="heart" ></ion-icon></button>
         <button *ngIf="recipe.favorite" ion-button color="secondary" (click)="removeFav(recipe)" item-right>
         <ion-icon name="md-remove-circle" ></ion-icon></button>
           <button ion-button color="primary" (click)="editRecipe(recipe)" item-right>
@@ -51,11 +53,12 @@
 
 
   </ion-list>
+  </ion-grid>
 
 
 
   <ion-fab right bottom>
-      <button ion-fab  (click)="addRecipe()" ><ion-icon name="add" ></ion-icon></button>
+      <button color="custom1" ion-fab  (click)="addRecipe()" ><ion-icon name="add" ></ion-icon></button>
       <!-- <ion-fab-list side="left">
         <button ion-fab><ion-icon name="logo-facebook"></ion-icon></button>
       </ion-fab-list> -->

@@ -5,19 +5,20 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
-  <ion-navbar>
+<ion-navbar color="dark">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Favorite</ion-title>
+    <ion-title color="light">Favorite</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+ 
   <ion-list inset >
+     <ion-grid>
   <ion-item-sliding *ngFor="let recipe of recipes | async">
 
       <ion-item  *ngIf="recipe.favorite" (click)="detailRecipe(recipe)"  >
@@ -36,5 +37,7 @@
         <ion-icon name="md-remove-circle" ></ion-icon></button>
   </ion-item-options>
     </ion-item-sliding>
+      </ion-grid>
     </ion-list>
+
 </ion-content>

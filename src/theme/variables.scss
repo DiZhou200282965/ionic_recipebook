@@ -15,7 +15,8 @@ $font-path: "../assets/fonts";
 textarea {
    resize: both;
 }
-
+// $background-color: transparent;
+// $background-image: url('http://www.coolandroidwallpapers.com/wp-content/uploads/Fruit/Fruit%20Android%20Wallpapers%20HD%2092.jpg');
 
 // Named Color Variables
 // --------------------------------------------------
@@ -26,11 +27,13 @@ textarea {
 // The "primary" color is the only required color in the map.
 
 $colors: (
+  custom1:    red,
+  custom:     #b22222,
   primary:    #387ef5,
   secondary:  #32db64,
   danger:     #f53d3d,
   light:      #f4f4f4,
-  dark:       #222
+  dark:       #000
 );
 
 
