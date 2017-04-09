@@ -20,7 +20,7 @@
       <ion-label color="dark">Recipe Name</ion-label>
       <ion-input [disabled]="disableEdit" [(ngModel)]="recipe.name"  type="text" value=""></ion-input>
     </ion-item>
-  <ion-item>
+  <ion-item class="categoryDropDown">
     <ion-label color="dark">Category</ion-label>
     <ion-select [disabled]="disableEdit"  [(ngModel)]="recipe.category">
 <ion-option value="Appetizer">Appetizer</ion-option>
