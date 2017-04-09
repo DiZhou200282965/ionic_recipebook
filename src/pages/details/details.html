@@ -51,7 +51,7 @@
     <ion-row *ngIf="!disableEdit">
       <ion-col col-8>
       <ion-item >
-           <ion-input  [(ngModel)]="ingredient.name"  type="text" value="" placeholder="name"></ion-input>
+           <ion-input  [(ngModel)]="ingredient.name"  type="text" value="" placeholder="Name"></ion-input>
       </ion-item>
       </ion-col>
         <ion-col col-2>
@@ -109,7 +109,7 @@
     <ion-list>
     <ion-item>
       <ion-label color="dark">Description</ion-label>
-      <ion-textarea color="dark" [disabled]="disableEdit" [(ngModel)]="recipe.description"  placeholder="your description"></ion-textarea>
+      <ion-textarea color="dark" [disabled]="disableEdit" [(ngModel)]="recipe.description"  placeholder="Your description"></ion-textarea>
       <!-- <ion-input type="text" [(ngModel)]="recipe.description" placeholder="your description"></ion-input> -->
     </ion-item>
 
