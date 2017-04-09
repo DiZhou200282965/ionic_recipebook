@@ -1,32 +1,32 @@
 page-home {
 
-ion-navbar{
-            opacity: 0.8;
-          }
-ion-title{
-            opacity: 1;
-         }
-        
-ion-content{
-            background-image: url('../../assets/images/wallpaper2.png') !important;
-            background-size: cover;
+            ion-navbar{
+                        opacity: 0.8;
+                    }
+            ion-title{
+                        opacity: 1;
+                    }
+                    
+            ion-content{
+                        background-image: url('../../assets/images/wallpaper2.png') !important;
+                        background-size: cover;
+                        }
+            ion-item{
+
+                        background-color:lightgray!important;
+                        border: 1px solid black !important;
+                        padding: 20px;
+
+                
+                    }
+            ion-grid{
+                opacity: 0.6;
             }
-ion-item{
-
-            background-color:lightgray!important;
-            border: 1px solid black !important;
-            padding: 20px;
-
-    
-        }
-ion-grid{
-    opacity: 0.6;
-}
-ion-fab{
-    button{
-        opacity: 0.5;
-    }
-        }
+            ion-fab{
+                button{
+                    opacity: 0.5;
+                }
+                    }
 
 }
 

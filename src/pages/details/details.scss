@@ -1,33 +1,33 @@
 page-details {
-ion-navbar{
-            opacity: 0.8;
-          }
-ion-title{
-            opacity: 1;
-         }
-        
-ion-content{
-            background-image: url('../../assets/images/wallpaper2.png') !important;
-            background-size: cover;
-            }
-ion-grid{
-                background-color:lightgoldenrodyellow !important;
-                opacity: 0.7;
-            }
-               ion-label{
-                   color: black;
 
-                    opacity:1;
+            ion-navbar{
+                        opacity: 0.8;
+                    }
+            ion-title{
+                        opacity: 1;
+                    }
+                    
+            ion-content{
+                        background-image: url('../../assets/images/wallpaper2.png') !important;
+                        background-size: cover;
+                        }
+            ion-grid{
+                            background-color:lightgoldenrodyellow !important;
+                            opacity: 0.7;
+                        }
+            ion-label{
+                        color: black;
+                        opacity:1;
+                            }
+            ion-item{
+
+                        background-color:lightgoldenrodyellow !important;
+
+                
+                    }
+            ion-fab{
+                button{
+                    opacity: 0.7;
                 }
-ion-item{
-
-            background-color:lightgoldenrodyellow !important;
-
-    
-        }
-ion-fab{
-    button{
-        opacity: 0.7;
-    }
-        }
+                    }
 }
