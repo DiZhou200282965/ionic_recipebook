@@ -14,112 +14,125 @@
 
 <ion-content padding>
 
-    <ion-grid>
- <!-- #################  part1  ############# -->
+  <ion-grid>
+    <!-- #################  part1  ############# -->
+      <ion-item>
+        <img src="{{imgUrl}}">
+  <img src="{{pathForImage(lastImage)}}" style="width: 100%" [hidden]="lastImage === null">
+  <h3 [hidden]="lastImage !== null">Please Select Image!</h3>
+ </ion-item>
+ <ion-item>
+       <button ion-button icon-left (click)="presentActionSheet()">
+        <ion-icon name="camera"></ion-icon>Select Image
+      </button>
+   <button ion-button icon-left (click)="uploadImage()" [disabled]="lastImage === null">
+        <ion-icon name="cloud-upload"></ion-icon>Upload
+      </button>
+ </ion-item>
+        <ion-item>
+          <ion-label color="dark">Recipe Name</ion-label>
+          <ion-input [disabled]="disableEdit" [(ngModel)]="recipe.name" type="text" value=""></ion-input>
+        </ion-item>
+        <ion-item class="categoryDropDown">
+          <ion-label color="dark">Category</ion-label>
+          <ion-select [disabled]="disableEdit" [(ngModel)]="recipe.category">
+            <ion-option value="Appetizer">Appetizer</ion-option>
+            <ion-option value="Main">Main</ion-option>
+            <ion-option value="Dessert">Dessert</ion-option>
+            <ion-option value="other">other</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label color="dark">Total Time</ion-label>
+          <ion-input [disabled]="disableEdit" type="number" [(ngModel)]="recipe.time" placeholder="roughly minutes"></ion-input>
+        </ion-item>
+  
+  </ion-grid>
 
-    <ion-item>
-      <ion-label color="dark">Recipe Name</ion-label>
-      <ion-input [disabled]="disableEdit" [(ngModel)]="recipe.name"  type="text" value=""></ion-input>
-    </ion-item>
-  <ion-item class="categoryDropDown">
-    <ion-label color="dark">Category</ion-label>
-    <ion-select [disabled]="disableEdit"  [(ngModel)]="recipe.category">
-<ion-option value="Appetizer">Appetizer</ion-option>
-   <ion-option value="Main">Main</ion-option>
-   <ion-option value="Dessert">Dessert</ion-option>
-   <ion-option value="other">other</ion-option>
- </ion-select>
-      </ion-item>
-    <ion-item>
-    <ion-label color="dark" >Total Time</ion-label>
-      <ion-input [disabled]="disableEdit" type="number" [(ngModel)]="recipe.time" placeholder="roughly minutes"></ion-input>
-    </ion-item>
-    </ion-grid>
 
 
 
-
-<!-- ############### part2 ################  -->
-<ion-grid>
-  <ion-row  >
+  <!-- ############### part2 ################  -->
+  <ion-grid>
+    <ion-row>
       <ion-col col-11>
         <h2>Ingredients</h2>
-        </ion-col>
-        <ion-col col-1>
+      </ion-col>
+      <ion-col col-1>
         <button color="danger" ion-button (click)="addIngredient(ingredient,recipe)"><ion-icon name="add" ></ion-icon></button>
       </ion-col>
     </ion-row>
     <ion-row *ngIf="!disableEdit">
       <ion-col col-8>
-      <ion-item >
-           <ion-input  [(ngModel)]="ingredient.name"  type="text" value="" placeholder="Name"></ion-input>
-      </ion-item>
-      </ion-col>
-        <ion-col col-2>
         <ion-item>
-           <ion-input  [(ngModel)]="ingredient.measure"  type="text" value="" placeholder="Measure"></ion-input>
+          <ion-input [(ngModel)]="ingredient.name" type="text" value="" placeholder="Name"></ion-input>
         </ion-item>
       </ion-col>
-        <ion-col col-2>
+      <ion-col col-2>
         <ion-item>
-          <ion-input [(ngModel)]="ingredient.unit"  type="text" value=""placeholder="Unit"></ion-input>
+          <ion-input [(ngModel)]="ingredient.measure" type="text" value="" placeholder="Measure"></ion-input>
         </ion-item>
-          </ion-col>
+      </ion-col>
+      <ion-col col-2>
+        <ion-item>
+          <ion-input [(ngModel)]="ingredient.unit" type="text" value="" placeholder="Unit"></ion-input>
+        </ion-item>
+      </ion-col>
     </ion-row>
 
-  <ion-row  >
-  <ion-col col-8>
-    <!-- Ingredients -->
-  Name
-  </ion-col>
-  <ion-col col-2>
-    <!-- Measure -->
-  Measure
-  </ion-col>
-  <ion-col col-2>
-    <!-- Unit -->
-    Unit
-  </ion-col>
-</ion-row>
+    <ion-row>
+      <ion-col col-8>
+        <!-- Ingredients -->
+        Name
+      </ion-col>
+      <ion-col col-2>
+        <!-- Measure -->
+        Measure
+      </ion-col>
+      <ion-col col-2>
+        <!-- Unit -->
+        Unit
+      </ion-col>
+    </ion-row>
 
-    <ion-row *ngFor="let i  of recipe.ingredient" >
-    <ion-col col-8>
-      <!-- Ingredients -->
-      {{ i.name }}
-    </ion-col>
+    <ion-row *ngFor="let i  of recipe.ingredient">
+      <ion-col col-8>
+        <!-- Ingredients -->
+        {{ i.name }}
+      </ion-col>
 
-    <ion-col col-2>
-      <!-- Measure -->
-      {{i.measure}}
-    </ion-col>
+      <ion-col col-2>
+        <!-- Measure -->
+        {{i.measure}}
+      </ion-col>
 
-    <ion-col col-2>
-      <!-- Unit -->
-      {{i.unit}}
-    </ion-col>
+      <ion-col col-2>
+        <!-- Unit -->
+        {{i.unit}}
+      </ion-col>
 
-  </ion-row>
+    </ion-row>
 
-</ion-grid>
-
-
+  </ion-grid>
 
 
-    <!-- ############ part3 ###########   -->
-    <ion-grid>
+
+
+  <!-- ############ part3 ###########   -->
+  <ion-grid>
     <ion-list>
-    <ion-item>
-      <ion-label color="dark">Description</ion-label>
-      <ion-textarea color="dark" [disabled]="disableEdit" [(ngModel)]="recipe.description"  placeholder="Your description"></ion-textarea>
-      <!-- <ion-input type="text" [(ngModel)]="recipe.description" placeholder="your description"></ion-input> -->
-    </ion-item>
+      <ion-item>
+        <ion-label color="dark">Description</ion-label>
+        <ion-textarea color="dark" [disabled]="disableEdit" [(ngModel)]="recipe.description" placeholder="Your description"></ion-textarea>
+        <!-- <ion-input type="text" [(ngModel)]="recipe.description" placeholder="your description"></ion-input> -->
+      </ion-item>
 
-  </ion-list>
-    </ion-grid>
+    </ion-list>
+  </ion-grid>
 
 
 
-  <button  *ngIf="!disableEdit"  ion-button (click)="saveRecipe()" >
+  <button *ngIf="!disableEdit" ion-button (click)="saveRecipe()">
     Save
   </button>
 
