@@ -16,37 +16,32 @@
 
   <ion-grid>
     <!-- #################  part1  ############# -->
-      <ion-item>
-        <img src="{{imgUrl}}">
-  <img src="{{pathForImage(lastImage)}}" style="width: 100%" [hidden]="lastImage === null">
-  <h3 [hidden]="lastImage !== null">Please Select Image!</h3>
- </ion-item>
- <ion-item>
-       <button ion-button icon-left (click)="presentActionSheet()">
+
+    <ion-item >
+      <img src="{{ lastImage === null?imgUrl:pathForImage(lastImage)}}" style="width: 100%" >
+    </ion-item>
+    <ion-item [hidden]="disableEdit">
+      <button ion-button icon-left (click)="presentActionSheet()">
         <ion-icon name="camera"></ion-icon>Select Image
       </button>
-   <button ion-button icon-left (click)="uploadImage()" [disabled]="lastImage === null">
-        <ion-icon name="cloud-upload"></ion-icon>Upload
-      </button>
- </ion-item>
-        <ion-item>
-          <ion-label color="dark">Recipe Name</ion-label>
-          <ion-input [disabled]="disableEdit" [(ngModel)]="recipe.name" type="text" value=""></ion-input>
-        </ion-item>
-        <ion-item class="categoryDropDown">
-          <ion-label color="dark">Category</ion-label>
-          <ion-select [disabled]="disableEdit" [(ngModel)]="recipe.category">
-            <ion-option value="Appetizer">Appetizer</ion-option>
-            <ion-option value="Main">Main</ion-option>
-            <ion-option value="Dessert">Dessert</ion-option>
-            <ion-option value="other">other</ion-option>
-          </ion-select>
-        </ion-item>
-        <ion-item>
-          <ion-label color="dark">Total Time</ion-label>
-          <ion-input [disabled]="disableEdit" type="number" [(ngModel)]="recipe.time" placeholder="roughly minutes"></ion-input>
-        </ion-item>
-  
+    </ion-item>
+    <ion-item>
+      <ion-label color="dark">Recipe Name</ion-label>
+      <ion-input [disabled]="disableEdit" [(ngModel)]="recipe.name" type="text" value=""></ion-input>
+    </ion-item>
+    <ion-item class="categoryDropDown">
+      <ion-label color="dark">Category</ion-label>
+      <ion-select [disabled]="disableEdit" [(ngModel)]="recipe.category">
+        <ion-option value="Appetizer">Appetizer</ion-option>
+        <ion-option value="Main">Main</ion-option>
+        <ion-option value="Dessert">Dessert</ion-option>
+        <ion-option value="other">other</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label color="dark">Total Time</ion-label>
+      <ion-input [disabled]="disableEdit" type="number" [(ngModel)]="recipe.time" placeholder="roughly minutes"></ion-input>
+    </ion-item>
   </ion-grid>
 
 
@@ -59,7 +54,7 @@
         <h2>Ingredients</h2>
       </ion-col>
       <ion-col col-1>
-        <button color="danger" ion-button (click)="addIngredient(ingredient,recipe)"><ion-icon name="add" ></ion-icon></button>
+        <button color="danger" ion-button (click)="addIngredient(ingredient,recipe)" [hidden]="disableEdit"><ion-icon name="add"  ></ion-icon></button>
       </ion-col>
     </ion-row>
     <ion-row *ngIf="!disableEdit">

@@ -129,6 +129,21 @@ public pathForImage(img) {
 
 
 public uploadImage() {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
   // Destination URL
   var url = "https://myionicproject-68fda.firebaseio.com";
 

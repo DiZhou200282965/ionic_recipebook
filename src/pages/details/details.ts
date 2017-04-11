@@ -3,7 +3,7 @@
 *  Student Name&ID: Di Zhou  200282965
 */
 import { Component, Inject } from '@angular/core';
-import { NavController, NavParams, ActionSheetController, Platform,ToastController } from 'ionic-angular';
+import { NavController, NavParams, ActionSheetController, Platform, ToastController, LoadingController, Loading } from 'ionic-angular';
 import { AngularFire, FirebaseApp, FirebaseListObservable } from 'angularfire2';
 import { Camera, File, Transfer, FilePath } from 'ionic-native';
 import { HomePage } from '../home/home';
@@ -24,11 +24,11 @@ export class DetailsPage {
   public disableEdit: boolean = false;
   method: string; // boolean to decide if its Edit,view or Add
   recipes: FirebaseListObservable<any>; // recipes that get from db
+  loading: Loading;
 
-
-  public imgUrl: string;
+  public imgUrl: string=null;
   lastImage: string = null;
-
+  storageRef: any;
   // constructor
 
   constructor(
@@ -39,14 +39,12 @@ export class DetailsPage {
     public alertCtrl: AlertController,
     public actionSheetCtrl: ActionSheetController,
     public platform: Platform,
-     public toastCtrl: ToastController,
+    public toastCtrl: ToastController,
+    public loadingCtrl: LoadingController
   ) {
 
-    const storageRef = firebaseApp.storage().ref().child('528418.jpg');
-    storageRef.getDownloadURL().then(url => this.imgUrl = url)
-
     this.method = navParams.get("method");
-    console.log(this.method)
+
     // if there is pram passing, get recipe object
     if (this.method == "add") { // if add  init empty obj
       this.recipe = {};
@@ -60,9 +58,22 @@ export class DetailsPage {
     }
     // get recipes from firebase
     this.recipes = af.database.list('/recipes');
-  }
+ 
+
+    this.storageRef = firebaseApp.storage().ref()
+if (this.recipe.imgName!=undefined){
+  this.storageRef.child('imgs/'+this.recipe.imgName).getDownloadURL().then(url => this.imgUrl = url )
+ 
+} 
+   
+
+
+ }
   // event emit when save hityed
   saveRecipe() {
+    if( this.lastImage!=null){
+      this.recipe.imgName = this.lastImage;
+    }
     console.log(this.method)
     if (this.method == "edit") {
       this.recipes.update(this.recipe.$key, this.recipe);
@@ -188,4 +199,17 @@ export class DetailsPage {
     }
 
   }
+
+  uploadImg() {
+    var targetPath = this.pathForImage(this.lastImage);
+    this.storageRef.put(targetPath).then(snapshot => {
+      this.presentToast('Image succesful uploaded.');
+      console.log('Uploaded a blob or file!');
+    }, err => {
+      this.loading.dismissAll()
+      this.presentToast('Error while uploading file.');
+    });
+  }
+
+
 }

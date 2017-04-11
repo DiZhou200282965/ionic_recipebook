@@ -5,8 +5,8 @@
 */
 
 
-import { Component } from '@angular/core';
-import {AngularFire, FirebaseListObservable} from 'angularfire2';
+import { Component,Inject } from '@angular/core';
+import {AngularFire,FirebaseApp, FirebaseListObservable} from 'angularfire2';
 import{DetailsPage} from '../details/details';
 import { NavController, AlertController } from 'ionic-angular';
 
@@ -20,10 +20,12 @@ export class HomePage {
 // variables declarations
 public  recipes:FirebaseListObservable<any>
 
-
+  storageRef: any;
 // constructor
-  constructor(public navCtrl: NavController,public alertCtrl: AlertController,  af: AngularFire) {
+  constructor( @Inject(FirebaseApp) firebaseApp: firebase.app.App,public navCtrl: NavController,public alertCtrl: AlertController,  af: AngularFire) {
+
     this.recipes = af.database.list('/recipes'); // get recipes list from db
+ this.storageRef = firebaseApp.storage().ref()
   }
 
   // function add recipe
@@ -48,6 +50,11 @@ addToFavorite(recipe){
 removeFav(recipe){
 recipe.favorite = false;
   this.recipes.update(recipe.$key,recipe);
+}
+getImgUrl(recipe){
+  var imgUrl;
+  this.storageRef.child('imgs/'+recipe.imgName).getDownloadURL().then(url => imgUrl = url)
+  return imgUrl;
 }
 
 }
