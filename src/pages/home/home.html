@@ -29,7 +29,7 @@
     <ion-item-sliding *ngFor="let recipe of recipes | async">
       <ion-item (click)="detailRecipe(recipe)">
         <ion-thumbnail item-left>
-              <img src="img/thumbnail-totoro.png">
+              <img src="gs://myionicproject-68fda.appspot.com/42785.jpg">
             </ion-thumbnail>
     <h2 >{{recipe.name}}</h2>
       <ion-icon *ngIf="recipe.favorite" name="heart" color="custom" ></ion-icon>
