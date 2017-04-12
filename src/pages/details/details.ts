@@ -26,7 +26,7 @@ export class DetailsPage {
   recipes: FirebaseListObservable<any>; // recipes that get from db
   loading: Loading;
 
-  public imgUrl: string=null;
+  public imgUrl: string = null;
   lastImage: string = null;
   storageRef: any;
   // constructor
@@ -58,20 +58,20 @@ export class DetailsPage {
     }
     // get recipes from firebase
     this.recipes = af.database.list('/recipes');
- 
+
 
     this.storageRef = firebaseApp.storage().ref()
-if (this.recipe.imgName!=undefined){
-  this.storageRef.child('imgs/'+this.recipe.imgName).getDownloadURL().then(url => this.imgUrl = url )
- 
-} 
-   
+    if (this.recipe.imgName != undefined) {
+      this.storageRef.child('imgs/' + this.recipe.imgName).getDownloadURL().then(url => this.imgUrl = url)
+
+    }
 
 
- }
+
+  }
   // event emit when save hityed
   saveRecipe() {
-    if( this.lastImage!=null){
+    if (this.lastImage != null) {
       this.recipe.imgName = this.lastImage;
     }
     console.log(this.method)
@@ -137,49 +137,26 @@ if (this.recipe.imgName!=undefined){
   public takePicture(sourceType) {
     // Create options for the Camera Dialog
     var options = {
-      quality: 100,
+      quality: 85,
+      destinationType: Camera.DestinationType.DATA_URL,
       sourceType: sourceType,
       saveToPhotoAlbum: false,
-      correctOrientation: true
+      correctOrientation: true,
+      targetWidth: 500,
+      targetHeight: 500,
+      allowEdit: true,
+      encodingType: Camera.EncodingType.PNG
+      // ,saveToPhotoAlbum: true
     };
 
     // Get the data of an image
-    Camera.getPicture(options).then((imagePath) => {
-      // Special handling for Android library
-      if (this.platform.is('android') && sourceType === Camera.PictureSourceType.PHOTOLIBRARY) {
-        FilePath.resolveNativePath(imagePath)
-          .then(filePath => {
-            let correctPath = filePath.substr(0, filePath.lastIndexOf('/') + 1);
-            let currentName = imagePath.substring(imagePath.lastIndexOf('/') + 1, imagePath.lastIndexOf('?'));
-            this.copyFileToLocalDir(correctPath, currentName, this.createFileName());
-          });
-      } else {
-        var currentName = imagePath.substr(imagePath.lastIndexOf('/') + 1);
-        var correctPath = imagePath.substr(0, imagePath.lastIndexOf('/') + 1);
-        this.copyFileToLocalDir(correctPath, currentName, this.createFileName());
-      }
+    Camera.getPicture(options).then((imgData) => {
+      // upload img
+      this.uploadImg(imgData);
     }, (err) => {
-      this.presentToast('Error while selecting image.');
+      this.presentToast('Error while selecting image. ' + JSON.stringify(err));
     });
   } // end of takePicture
-
-
-  // Create a new name for the image
-  private createFileName() {
-    var d = new Date(),
-      n = d.getTime(),
-      newFileName = n + ".jpg";
-    return newFileName;
-  }
-
-  // Copy the image to a local folder
-  private copyFileToLocalDir(namePath, currentName, newFileName) {
-    File.copyFile(namePath, currentName, cordova.file.dataDirectory, newFileName).then(success => {
-      this.lastImage = newFileName;
-    }, error => {
-      this.presentToast('Error while storing file.');
-    });
-  }
 
   private presentToast(text) {
     let toast = this.toastCtrl.create({
@@ -190,26 +167,28 @@ if (this.recipe.imgName!=undefined){
     toast.present();
   }
 
-  // Always get the accurate path to your apps folder
-  public pathForImage(img) {
-    if (img === null) {
-      return '';
-    } else {
-      return cordova.file.dataDirectory + img;
-    }
-
-  }
-
-  uploadImg() {
-    var targetPath = this.pathForImage(this.lastImage);
-    this.storageRef.put(targetPath).then(snapshot => {
+private createFileName() {
+  var d = new Date(),
+  n = d.getTime(),
+  newFileName =  n + ".png";
+  return newFileName;
+}
+  uploadImg(imgData) {
+    var tempName =this.createFileName();
+    this.storageRef.child('imgs/'+tempName).putString(imgData, 'base64', {contentType: 'image/png'}).then((snapshot) => {
+      this.recipe.imgName=tempName;
+      this.recipes.update(this.recipe.$key, this.recipe)
+      this.storageRef.child('imgs/' + this.recipe.imgName).getDownloadURL().then(url => this.imgUrl = url)
       this.presentToast('Image succesful uploaded.');
-      console.log('Uploaded a blob or file!');
-    }, err => {
-      this.loading.dismissAll()
-      this.presentToast('Error while uploading file.');
-    });
+      }, err => {
+        this.loading.dismissAll()
+        this.presentToast('Error while uploading file.');
+      });
+   
   }
+
+
+
 
 
 }

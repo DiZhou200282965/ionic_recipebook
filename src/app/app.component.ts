@@ -7,6 +7,7 @@ import { FavoritePage } from '../pages/favorite/favorite';
 import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
 import {ImgTestPage } from '../pages/img-test/img-test'
+
 // import { StatusBar } from '@ionic-native/status-bar';
 // import { SplashScreen } from '@ionic-native/splash-screen';
 
