@@ -5,7 +5,7 @@
 import { Component, Inject } from '@angular/core';
 import { NavController, NavParams, ActionSheetController, Platform, ToastController, LoadingController, Loading } from 'ionic-angular';
 import { AngularFire, FirebaseApp, FirebaseListObservable } from 'angularfire2';
-import { Camera, File, Transfer, FilePath } from 'ionic-native';
+import { Camera,   FilePath } from 'ionic-native';
 import { HomePage } from '../home/home';
 import { AlertController } from 'ionic-angular';
 import * as firebase from 'firebase';
@@ -51,20 +51,22 @@ export class DetailsPage {
     }
     else if (this.method == "edit") { // if edit, enable textboxes etc.
       this.recipe = navParams.get("recipe");
+      this.imgUrl =  this.recipe.imgName;
     }
     else { // if view, disable edit
       this.disableEdit = true;
       this.recipe = navParams.get("recipe");
+       this.imgUrl =  this.recipe.imgName;
     }
     // get recipes from firebase
     this.recipes = af.database.list('/recipes');
 
 
     this.storageRef = firebaseApp.storage().ref()
-    if (this.recipe.imgName != undefined) {
-      this.storageRef.child('imgs/' + this.recipe.imgName).getDownloadURL().then(url => this.imgUrl = url)
+    // if (this.recipe.imgName != undefined) {
+    //   this.storageRef.child('imgs/' + this.recipe.imgName).getDownloadURL().then(url => this.imgUrl = url)
 
-    }
+    // }
 
 
 
@@ -176,9 +178,16 @@ private createFileName() {
   uploadImg(imgData) {
     var tempName =this.createFileName();
     this.storageRef.child('imgs/'+tempName).putString(imgData, 'base64', {contentType: 'image/png'}).then((snapshot) => {
-      this.recipe.imgName=tempName;
-      this.recipes.update(this.recipe.$key, this.recipe)
-      this.storageRef.child('imgs/' + this.recipe.imgName).getDownloadURL().then(url => this.imgUrl = url)
+      // this.recipe.imgName=tempName;
+      // this.recipes.update(this.recipe.$key, this.recipe)
+      // this.storageRef.child('imgs/' + this.recipe.imgName).getDownloadURL().then(url => this.imgUrl = url)
+
+      this.storageRef.child('imgs/' + tempName).getDownloadURL().then(url => {
+        this.imgUrl = url
+        this.recipe.imgName=url;
+        this.recipes.update(this.recipe.$key, this.recipe)
+      })
+
       this.presentToast('Image succesful uploaded.');
       }, err => {
         this.loading.dismissAll()

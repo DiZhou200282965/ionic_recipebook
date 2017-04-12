@@ -25,6 +25,9 @@ public  recipes:FirebaseListObservable<any>
   constructor( @Inject(FirebaseApp) firebaseApp: firebase.app.App,public navCtrl: NavController,public alertCtrl: AlertController,  af: AngularFire) {
 
     this.recipes = af.database.list('/recipes'); // get recipes list from db
+    
+
+
  this.storageRef = firebaseApp.storage().ref()
   }
 
@@ -52,9 +55,8 @@ recipe.favorite = false;
   this.recipes.update(recipe.$key,recipe);
 }
 getImgUrl(recipe){
-  var imgUrl;
-  this.storageRef.child('imgs/'+recipe.imgName).getDownloadURL().then(url => imgUrl = url)
-  return imgUrl;
+
+  this.storageRef.child('imgs/'+recipe.imgName).getDownloadURL().then(url =>{return url;} )
 }
 
 }

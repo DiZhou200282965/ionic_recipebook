@@ -23,7 +23,7 @@
 
       <ion-item  *ngIf="recipe.favorite" (click)="detailRecipe(recipe)"  >
         <ion-thumbnail item-left>
-              <img src="img/thumbnail-totoro.png">
+              <img src="{{recipe.imgName}}">
             </ion-thumbnail>
     <!-- <ion-label >{{recipe.name}}</ion-label> -->
     <h2>{{recipe.name}}</h2>
