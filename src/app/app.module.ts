@@ -10,7 +10,7 @@ import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { DetailsPage } from '../pages/details/details';
 import { FavoritePage } from '../pages/favorite/favorite';
-import {ImgTestPage } from '../pages/img-test/img-test';
+
 
 
 // Import the AF2 Module
@@ -31,8 +31,7 @@ export const firebaseConfig = {
     ContactPage,
     HomePage,
     DetailsPage,
-    FavoritePage,
-    ImgTestPage
+    FavoritePage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -45,8 +44,7 @@ export const firebaseConfig = {
     ContactPage,
     HomePage,
     DetailsPage,
-    FavoritePage,
-    ImgTestPage
+    FavoritePage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
 })

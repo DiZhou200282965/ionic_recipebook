@@ -6,7 +6,7 @@ import { HomePage } from '../pages/home/home';
 import { FavoritePage } from '../pages/favorite/favorite';
 import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
-import {ImgTestPage } from '../pages/img-test/img-test'
+
 
 // import { StatusBar } from '@ionic-native/status-bar';
 // import { SplashScreen } from '@ionic-native/splash-screen';
@@ -32,8 +32,7 @@ export class MyApp {
       { title: 'Home', component: HomePage },
       { title: 'Favorite', component: FavoritePage },
       {title: 'About', component: AboutPage },
-      { title: 'Contact', component: ContactPage },
-      {title:'img', component:ImgTestPage}
+      { title: 'Contact', component: ContactPage }
     ];
 }
 

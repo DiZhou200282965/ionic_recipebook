@@ -14,12 +14,13 @@
 
 <ion-content padding>
 
-  <ion-grid>
+
     <!-- #################  part1  ############# -->
 
     <ion-item >
       <img src="{{imgUrl}}" style="width: 100%" >
     </ion-item>
+      <ion-grid>
     <ion-item [hidden]="disableEdit">
       <button ion-button icon-left (click)="presentActionSheet()">
         <ion-icon name="camera"></ion-icon>Select Image

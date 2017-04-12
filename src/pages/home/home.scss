@@ -1,4 +1,14 @@
 page-home {
+
+ion-grid{
+    opacity: 1;
+}
+       ion-item{
+           ion-thumbnail{
+
+               opacity: 1;
+           }
+       }
             h2{
                 font-weight:1500;
                 
@@ -19,7 +29,7 @@ page-home {
                         background-color:lightgray!important;
                         border: 1px solid black !important;
                         padding: 20px;
-
+                     
                 
                     }
             ion-grid{
@@ -30,6 +40,6 @@ page-home {
                     opacity: 0.5;
                 }
                     }
-
+               
 }
 
