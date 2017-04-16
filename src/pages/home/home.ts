@@ -41,7 +41,15 @@ public  recipes:FirebaseListObservable<any>
   }
   // function delete recipe
   deleteRecipe(recipe){
-    this.recipes.remove(recipe); // delete selected recipe from db
+
+ let alert = this.alertCtrl.create({
+      title: 'Alert',
+      subTitle: 'Are you sure you want to delete this recipe: '+recipe.name+'?',
+      buttons: [{text:'Yes', handler: data => {
+           this.recipes.remove(recipe); // delete selected recipe from db
+          }},'No']
+    });
+    alert.present();
   }
   detailRecipe(recipe){
       this.navCtrl.push(DetailsPage,{recipe:recipe,method:"view"});
