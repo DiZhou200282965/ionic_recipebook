@@ -49,17 +49,13 @@
 
 
   <!-- ############### part2 ################  -->
-  <ion-grid>
+  <ion-grid  *ngIf="!recipe.ingredient==[]" >
     <ion-row>
        <ion-item>
            <h2 item-left>Ingredients</h2>
             <button item-right color="danger" ion-button (click)="popupAddingView(recipe)" [hidden]="disableEdit"><ion-icon name="add"  ></ion-icon></button>
        </ion-item>
-     
-      
-      
-       
-      
+         
     </ion-row>
     <ion-row>
       <ion-col col-8>
@@ -103,7 +99,7 @@
 
 
   <!-- ############ part3 ###########   -->
-  <ion-grid>
+  <ion-grid  *ngIf="recipe.description">
     <ion-list>
       <ion-item>
         <ion-label color="dark">Description</ion-label>
