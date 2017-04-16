@@ -38,13 +38,13 @@
 </ion-item>
       <ion-item-options>
         <!-- button list -->
-        <button *ngIf="!recipe.favorite" ion-button color="secondary" (click)="addToFavorite(recipe)" item-right>
+        <button class='button button-positive large_button' *ngIf="!recipe.favorite" ion-button color="secondary" (click)="addToFavorite(recipe)" item-right>
         <ion-icon name="heart" ></ion-icon></button>
-        <button *ngIf="recipe.favorite" ion-button color="secondary" (click)="removeFav(recipe)" item-right>
+        <button class='button button-positive large_button' *ngIf="recipe.favorite" ion-button color="secondary" (click)="removeFav(recipe)" item-right>
         <ion-icon name="md-close"></ion-icon></button>
-          <button ion-button color="primary" (click)="editRecipe(recipe)" item-right>
+          <button class='button button-positive large_button' ion-button color="primary" (click)="editRecipe(recipe)" item-right>
           <ion-icon name="build" ></ion-icon></button>
-            <button ion-button color="custom" (click)="deleteRecipe(recipe)" item-right>
+            <button class='button button-positive large_button' ion-button color="custom" (click)="deleteRecipe(recipe)" item-right>
             <ion-icon name="trash" ></ion-icon></button>
       </ion-item-options>
     </ion-item-sliding>
