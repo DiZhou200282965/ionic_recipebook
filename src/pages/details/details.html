@@ -15,12 +15,12 @@
 <ion-content padding>
 
 
-    <!-- #################  part1  ############# -->
+  <!-- #################  part1  ############# -->
 
-    <ion-item >
-      <img src="{{imgUrl}}" style="width: 100%" >
-    </ion-item>
-      <ion-grid>
+  <ion-item>
+    <img src="{{imgUrl}}" style="width: 100%">
+  </ion-item>
+  <ion-grid>
     <ion-item [hidden]="disableEdit">
       <button ion-button icon-left (click)="presentActionSheet()">
         <ion-icon name="camera"></ion-icon>Select Image
@@ -51,31 +51,16 @@
   <!-- ############### part2 ################  -->
   <ion-grid>
     <ion-row>
-      <ion-col col-11>
-        <h2>Ingredients</h2>
-      </ion-col>
-      <ion-col col-1>
-        <button color="danger" ion-button (click)="addIngredient(ingredient,recipe)" [hidden]="disableEdit"><ion-icon name="add"  ></ion-icon></button>
-      </ion-col>
+       <ion-item>
+           <h2 item-left>Ingredients</h2>
+            <button item-right color="danger" ion-button (click)="popupAddingView(recipe)" [hidden]="disableEdit"><ion-icon name="add"  ></ion-icon></button>
+       </ion-item>
+     
+      
+      
+       
+      
     </ion-row>
-    <ion-row *ngIf="!disableEdit">
-      <ion-col col-8>
-        <ion-item>
-          <ion-input [(ngModel)]="ingredient.name" type="text" value="" placeholder="Name"></ion-input>
-        </ion-item>
-      </ion-col>
-      <ion-col col-2>
-        <ion-item>
-          <ion-input [(ngModel)]="ingredient.measure" type="text" value="" placeholder="Measure"></ion-input>
-        </ion-item>
-      </ion-col>
-      <ion-col col-2>
-        <ion-item>
-          <ion-input [(ngModel)]="ingredient.unit" type="text" value="" placeholder="Unit"></ion-input>
-        </ion-item>
-      </ion-col>
-    </ion-row>
-
     <ion-row>
       <ion-col col-8>
         <!-- Ingredients -->
@@ -89,25 +74,28 @@
         <!-- Unit -->
         Unit
       </ion-col>
+       
     </ion-row>
-
-    <ion-row *ngFor="let i  of recipe.ingredient">
-      <ion-col col-8>
+ 
+ <ion-row *ngFor="let i  of recipe.ingredient">
+     <ion-item>  
         <!-- Ingredients -->
+        <ion-label> 
         {{ i.name }}
-      </ion-col>
-
-      <ion-col col-2>
+   
+</ion-label>
+    <ion-label> {{i.measure}}
+     </ion-label>
         <!-- Measure -->
-        {{i.measure}}
-      </ion-col>
-
-      <ion-col col-2>
+       
+<ion-label> {{i.unit}}</ion-label>
+    
         <!-- Unit -->
-        {{i.unit}}
-      </ion-col>
-
-    </ion-row>
+       
+         <button item-right color="danger" ion-button (click)="deleteIngredient(i,recipe)" [hidden]="disableEdit"><ion-icon name="remove"  ></ion-icon></button>
+      </ion-item>
+ </ion-row>
+    
 
   </ion-grid>
 
