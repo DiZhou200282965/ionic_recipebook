@@ -18,7 +18,7 @@ declare var cordova: any;
 })
 export class DetailsPage {
   // variables declarations
-
+  public realtimeRecipe: any;
   public recipe: any; //recipe binded recipes
   public ingredient: any = {};
   public disableEdit: boolean = false;
@@ -48,18 +48,33 @@ export class DetailsPage {
     // if there is pram passing, get recipe object
     if (this.method == "add") { // if add  init empty obj
       this.recipe = {};
+      this.recipe.ingredient=[];
     }
     else if (this.method == "edit") { // if edit, enable textboxes etc.
       this.recipe = navParams.get("recipe");
-      this.imgUrl =  this.recipe.imgName;
+      this.imgUrl = this.recipe.imgName;
     }
     else { // if view, disable edit
       this.disableEdit = true;
       this.recipe = navParams.get("recipe");
-       this.imgUrl =  this.recipe.imgName;
+      this.imgUrl = this.recipe.imgName;
     }
     // get recipes from firebase
     this.recipes = af.database.list('/recipes');
+
+    // loop through recipes, and get recipe instance by Id
+
+
+    // this.recipes.subscribe(items => {
+    //   // items is an array
+    //   items.forEach(item => {
+    //     // console.log('Item:', item.$key);
+    //     if (item.$key === this.recipe.$key) {
+    //       console.log('Item:', item);
+    //       this.realtimeRecipe = item;
+    //     }
+    //   });
+    // })
 
 
     this.storageRef = firebaseApp.storage().ref()
@@ -85,31 +100,68 @@ export class DetailsPage {
     this.navCtrl.push(HomePage); // redirect to home
   }
   addIngredient(ingredient, recipe) {
-    // check if there is empty string
-    if (ingredient.measure == undefined || ingredient.unit == undefined || ingredient.name == undefined) {
-      this.showAlert();
-    }
-    else {
+ recipe.ingredient.push(ingredient);
+  if(this.method === "edit"){
 
-      if (recipe.ingredient == undefined) {
-        recipe.ingredient = [];
-      }
-      console.log(ingredient)
-      recipe.ingredient.push(ingredient);
-      console.log(recipe)
-      this.recipes.update(recipe.$key, recipe);
-    }
+ this.recipes.update(recipe.$key, recipe);
   }
+     
 
-  showAlert() {
-    let alert = this.alertCtrl.create({
-      title: 'need fill',
-      subTitle: 'textboxes filling required',
-      buttons: ['OK']
-    });
-    alert.present();
+   
+    
   }
+deleteIngredient(ingredient,recipe){
+      
+ recipe.ingredient.forEach((ingred,index)=>{
+  if(ingred.name === ingredient.name&&ingred.measure === ingredient.measure&&ingred.unit === ingredient.unit){
+    recipe.ingredient.splice(index,1);
+    this.recipes.update(recipe.$key, recipe);
+  }  
 
+ })
+ 
+}
+ 
+  popupAddingView(recipe){
+      let prompt = this.alertCtrl.create({
+      title: 'Add a ingredient',
+      message: "Please enter ingredient's name,measure and unit.",
+      inputs: [
+        {
+          name: 'name',
+          placeholder: 'Name'
+        },
+        {
+          name: 'measure',
+          placeholder: 'Measure'
+        },
+        {
+          name: 'unit',
+          placeholder: 'Unit'
+        }
+       
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Save',
+          handler: data => {
+
+   this.addIngredient(data, recipe)
+    }            
+        }
+      ]
+    }); 
+  
+    
+    prompt.present();
+  }
+  
   public presentActionSheet() {
     let actionSheet = this.actionSheetCtrl.create({
       title: 'Select Image Source',
@@ -169,31 +221,31 @@ export class DetailsPage {
     toast.present();
   }
 
-private createFileName() {
-  var d = new Date(),
-  n = d.getTime(),
-  newFileName =  n + ".png";
-  return newFileName;
-}
+  private createFileName() {
+    var d = new Date(),
+      n = d.getTime(),
+      newFileName = n + ".png";
+    return newFileName;
+  }
   uploadImg(imgData) {
-    var tempName =this.createFileName();
-    this.storageRef.child('imgs/'+tempName).putString(imgData, 'base64', {contentType: 'image/png'}).then((snapshot) => {
+    var tempName = this.createFileName();
+    this.storageRef.child('imgs/' + tempName).putString(imgData, 'base64', { contentType: 'image/png' }).then((snapshot) => {
       // this.recipe.imgName=tempName;
       // this.recipes.update(this.recipe.$key, this.recipe)
       // this.storageRef.child('imgs/' + this.recipe.imgName).getDownloadURL().then(url => this.imgUrl = url)
 
       this.storageRef.child('imgs/' + tempName).getDownloadURL().then(url => {
         this.imgUrl = url
-        this.recipe.imgName=url;
+        this.recipe.imgName = url;
         this.recipes.update(this.recipe.$key, this.recipe)
       })
 
       this.presentToast('Image succesful uploaded.');
-      }, err => {
-        this.loading.dismissAll()
-        this.presentToast('Error while uploading file.');
-      });
-   
+    }, err => {
+      this.loading.dismissAll()
+      this.presentToast('Error while uploading file.');
+    });
+
   }
 
 
