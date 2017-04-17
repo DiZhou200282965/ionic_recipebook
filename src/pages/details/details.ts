@@ -5,7 +5,7 @@
 import { Component, Inject } from '@angular/core';
 import { NavController, NavParams, ActionSheetController, Platform, ToastController, LoadingController, Loading } from 'ionic-angular';
 import { AngularFire, FirebaseApp, FirebaseListObservable } from 'angularfire2';
-import { Camera,   FilePath } from 'ionic-native';
+import { Camera } from 'ionic-native';
 import { HomePage } from '../home/home';
 import { AlertController } from 'ionic-angular';
 import * as firebase from 'firebase';
