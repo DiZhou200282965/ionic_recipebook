@@ -99,14 +99,13 @@
 
 
   <!-- ############ part3 ###########   -->
-  <ion-grid  *ngIf="recipe.description">
+  <ion-grid  >
     <ion-list>
       <ion-item>
         <ion-label color="dark">Description</ion-label>
         <ion-textarea color="dark" [disabled]="disableEdit" [(ngModel)]="recipe.description" placeholder="Your description"></ion-textarea>
         <!-- <ion-input type="text" [(ngModel)]="recipe.description" placeholder="your description"></ion-input> -->
       </ion-item>
-
     </ion-list>
   </ion-grid>
 
